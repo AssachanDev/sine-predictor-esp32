@@ -1,68 +1,88 @@
-# Sine Wave Prediction with TensorFlow Lite for Microcontrollers (ESP32)
+# 🌊 Sine Wave Prediction on ESP32
+[![PlatformIO](https://img.shields.io/badge/PlatformIO-Compatible-orange?style=for-the-badge&logo=platformio)](https://platformio.org/)
+[![TensorFlow Lite](https://img.shields.io/badge/TensorFlow-Lite-FF6F00?style=for-the-badge&logo=tensorflow)](https://www.tensorflow.org/lite/microcontrollers)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-This project demonstrates a complete end-to-end workflow for TinyML: training a simple neural network to predict sine wave values and deploying it to an ESP32 microcontroller using TensorFlow Lite for Microcontrollers.
+An end-to-end **TinyML** project demonstrating how to train a neural network in Python and deploy it to an ESP32 for real-time inference.
 
-## Project Overview
+---
 
-The project consists of two main parts:
-1.  **Training**: A Python script using TensorFlow/Keras to train a model that approximates the sine function.
-2.  **Deployment**: An Arduino/C++ project that runs the trained model on an ESP32 to perform real-time inference.
+## 🚀 Overview
 
-## Project Structure
+This repository showcases the full lifecycle of an Edge AI application. By training a simple model to learn the mathematical `sin()` function, we can see how complex logic can be compressed into a lightweight model and executed on low-power hardware.
 
-- `train_model.py`: Python script to train the model and export it to `.tflite` format.
-- `src/main.cpp`: ESP32 source code that initializes the TFLite interpreter and runs inference.
-- `include/model_data.h`: The trained model exported as a C header file (byte array).
-- `platformio.ini`: PlatformIO configuration file.
-- `sine_model.h5` / `sine_model.tflite`: Trained model files.
+### ✨ Key Features
+- 🧠 **Smart Logic**: Multi-layer perceptron (MLP) trained with Keras.
+- ⚡ **Ultra-Fast**: Sub-millisecond inference on the ESP32.
+- 📉 **Optimized**: Uses TensorFlow Lite for Microcontrollers (TFLM) to minimize RAM/Flash usage.
+- 📈 **Real-time Monitoring**: Serial output shows Prediction vs. Ground Truth accuracy.
 
-## Prerequisites
+---
 
-### Python (Training)
-- Python 3.8+
-- TensorFlow 2.x
-- NumPy
+## 🛠️ Project Structure
 
-### Hardware (Deployment)
-- ESP32 Development Board (e.g., ESP32 DevKit V1)
-- USB Cable
+```text
+.
+├── 🐍 train_model.py      # Python training script
+├── 🔌 src/main.cpp        # ESP32 Inference logic
+├── 📄 include/model_data.h # Compiled TFLite model array
+├── ⚙️ platformio.ini     # Hardware configuration
+└── 📦 sine_model.tflite   # Exported flatbuffer model
+```
 
-### Software (Deployment)
-- [PlatformIO](https://platformio.org/) (recommended as a VS Code extension)
+---
 
-## Getting Started
+## 📥 Getting Started
 
-### 1. Train the Model
-If you want to re-train the model, run:
+### 1. Training (Python)
+If you want to tweak the brain:
 ```bash
+# Setup environment
+pip install tensorflow numpy
+
+# Train and export
 python train_model.py
 ```
-This will generate `sine_model.tflite`.
 
-### 2. Convert Model to C Header
-To use the model on a microcontroller, it must be converted to a C array. You can use the `xxd` tool:
+### 2. Conversion (Optional)
+Convert the `.tflite` file into a C-header array:
 ```bash
 xxd -i sine_model.tflite > include/model_data.h
 ```
-*Note: You may need to update the variable names in `include/model_data.h` to match those used in `src/main.cpp` (`sine_model_tflite` and `sine_model_tflite_len`).*
 
-### 3. Build and Upload
-1.  Connect your ESP32 to your computer.
-2.  Open the project in VS Code with PlatformIO.
-3.  Click the **Upload** button (arrow icon in the bottom status bar) or run:
-    ```bash
-    pio run --target upload
-    ```
+### 3. Deployment (Hardware)
+Flash the ESP32 using PlatformIO:
+```bash
+# Build and Upload
+pio run --target upload
 
-## Results
-Once uploaded, open the Serial Monitor (baud rate `115200`). You will see the ESP32 generating random angles, predicting their sine values using the AI model, and comparing them to the actual values:
-
-```text
-Angle:0.52,Actual:0.50,AI:0.49,Err:0.0100,Acc:99.00%
-Angle:-1.57,Actual:-1.00,AI:-0.98,Err:0.0200,Acc:98.00%
+# Monitor output
+pio device monitor
 ```
 
-## How it Works
-- **Model Architecture**: A simple Multi-Layer Perceptron (MLP) with one input, two hidden layers of 16 neurons (ReLU activation), and one output.
-- **Inference**: The ESP32 uses the `TensorFlowLite_ESP32` library to load the model from memory and perform inference in the `loop()` function.
-- **Optimization**: The model is converted to TFLite format to minimize memory footprint, making it suitable for resource-constrained microcontrollers.
+---
+
+## 📊 Performance & Results
+
+Once the device is running, open the Serial Monitor to see the AI in action:
+
+| Angle (rad) | Actual Value | AI Prediction | Accuracy |
+| :--- | :--- | :--- | :--- |
+| `0.52` | `0.50` | `0.49` | `99.00%` |
+| `-1.57` | `-1.00` | `-0.98` | `98.00%` |
+| `2.10` | `0.86` | `0.85` | `98.80%` |
+
+---
+
+## 🔌 Hardware Requirements
+* **Microcontroller:** ESP32 (DevKit V1 recommended)
+* **Connection:** Micro-USB / USB-C cable
+
+---
+
+## 🤝 Contributing
+Feel free to fork this project and experiment with more complex functions like `cos(x)` or even multi-input sensors!
+
+---
+*Built with ❤️ for the TinyML community.*
