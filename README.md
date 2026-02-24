@@ -8,8 +8,6 @@ An end-to-end **TinyML** project demonstrating how to train a neural network in 
 
 ---
 
----
-
 ## 🎥 Demo
 <div align="center">
   <video src="https://github.com/user-attachments/assets/76f0b787-3226-4e50-a557-f58485930ec4" width="100%" controls>
