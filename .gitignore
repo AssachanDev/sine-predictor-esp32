@@ -10,3 +10,5 @@ __pycache__/
 # Model Files (Optional)
 # sine_model.h5
 # sine_model.tflite
+.cache/
+compile_commands.json
