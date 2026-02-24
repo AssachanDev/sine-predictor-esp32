@@ -8,6 +8,16 @@ An end-to-end **TinyML** project demonstrating how to train a neural network in 
 
 ---
 
+---
+
+## 🎥 Demo
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/76f0b787-3226-4e50-a557-f58485930ec4" width="100%" controls>
+  </video>
+</div>
+
+---
+
 ## 🚀 Overview
 
 This repository showcases the full lifecycle of an Edge AI application. By training a simple model to learn the mathematical `sin()` function, we can see how complex logic can be compressed into a lightweight model and executed on low-power hardware.
