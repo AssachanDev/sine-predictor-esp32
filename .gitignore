@@ -1,0 +1,12 @@
+# PlatformIO
+.pio/
+.vscode/
+
+# Python Virtual Environment
+env/
+__pycache__/
+*.pyc
+
+# Model Files (Optional)
+# sine_model.h5
+# sine_model.tflite
