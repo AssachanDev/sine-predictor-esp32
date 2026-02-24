@@ -88,9 +88,3 @@ Once the device is running, open the Serial Monitor to see the AI in action:
 * **Connection:** Micro-USB / USB-C cable
 
 ---
-
-## 🤝 Contributing
-Feel free to fork this project and experiment with more complex functions like `cos(x)` or even multi-input sensors!
-
----
-*Built with ❤️ for the TinyML community.*
